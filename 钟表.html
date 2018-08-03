@@ -36,16 +36,16 @@
         }
         oUL.innerHTML = inner;
         oCSS.innerHTML += scss;
+        setInterval(toTime,1000);
         function toTime(){
             var date = new Date();
             var sec1 = date.getSeconds();
-            var min1 = date.getMinutes();
-            var hour1 = date.getHours();
+            var min1 = date.getMinutes() + sec1/60;
+            var hour1 = date.getHours() + min1/60;
             sec.style.WebkitTransform = "rotate("+(sec1*6)+"deg)";
             min.style.WebkitTransform = "rotate("+(min1*6)+"deg)";
             hour.style.WebkitTransform = "rotate("+(hour1*30)+"deg)";
         }
-        setInterval(toTime, 1000);
     </script>
 </div>
 </body>
