@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style id="css">
+        body,ul,ol{margin: 0;padding: 0;}
+        li{list-style: none;}
+        #wrap{width:800px;margin: 100px auto 0;}
+        #picList{width:800px;height:360px;-webkit-perspective: 800px;-webkit-perspective-origin: right;}
+        #picList li{width:50px;height:360px;position: relative;-webkit-transform-style: preserve-3d;-webkit-transform-origin: center center -180px;
+            float: left;}
+        #picList a{width:100%;height:100%;position:absolute;left:0;top:0;}
+        #picList li a:nth-of-type(1){background: url("./image/1.jpg") no-repeat;}
+        #picList li a:nth-of-type(2){background: url("./image/2.jpg") no-repeat;-webkit-transform: rotateX(-90deg);-webkit-transform-origin: top;}
+        #picList li a:nth-of-type(3){background: url("./image/3.jpg") no-repeat;-webkit-transform: translateZ(-360px);}
+        #picList li a:nth-of-type(4){background: url("./image/4.jpg") no-repeat;-webkit-transform-origin: bottom;-webkit-transform: rotateX(90deg);}
+        #picList li span{width:360px;height:360px;position:absolute;background:darkslategrey;}
+        #picList li span:nth-of-type(1){-webkit-transform: rotateY(90deg);-webkit-transform-origin: left;left:0;}
+        #picList li span:nth-of-type(2){-webkit-transform: rotateY(-90deg);-webkit-transform-origin: right;right:0;}
+        #btns{float: right;padding:10px 0;text-align: center;}
+        #btns li{width:30px;height:30px;border-radius: 50%;background: #000000;
+            color: #ffffff;font-size: 18px;margin: 0 5px;line-height: 30px;float:left;font-style: italic;}
+        #btns .active{background: #f60}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul id="picList">
+            <li>
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+                <span></span>
+                <span></span>
+            </li>
+        </ul>
+        <ol id="btns">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ol>
+    </div>
+    <script>
+        var oList = document.getElementById('picList');
+        var oCss = document.getElementById('css');
+        var oBtns = document.getElementById('btns').getElementsByTagName('li');
+        var oLi = null;
+        var oWid  = 50;
+        var inner = '';
+        var iCss = '';
+        var iNow = 0;
+        var length = oList.clientWidth/oWid;
+        for(var i = 0; i < length; i++){
+            inner += '<li><a href=""></a><a href=""></a><a href=""></a><a href=""></a><span></span><span></span></li>';
+            iCss += "#picList li:nth-of-type("+ (i+1) +") a{background-position: -" + (i*50) + "px 0;}";
+        }
+        oList.innerHTML = inner;
+        oCss += iCss;
+        oLi = oList.children;
+        for(var i = 0; i < oBtns.length; i++){
+            (function(a){
+                oBtns[a].onclick = function(){
+                    for(var i = 0; i < oLi.length; i++){
+                        oLi[i].style.transition = "0.5s "+i*50+"ms";
+                        oLi[i].style.WebkitTransform = "rotateX(-"+ a*90 +"deg)";
+                    }
+                    this.className = 'active';
+                    oBtns[iNow].className = '';
+                    iNow = a;
+                }
+            })(i)
+        }
+    </script>
+</body>
+</html>
