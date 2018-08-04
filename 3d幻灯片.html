@@ -27,14 +27,6 @@
 <body>
     <div id="wrap">
         <ul id="picList">
-            <li>
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
-                <a href=""></a>
-                <span></span>
-                <span></span>
-            </li>
         </ul>
         <ol id="btns">
             <li class="active">1</li>
@@ -55,12 +47,12 @@
         var length = oList.clientWidth/oWid;
         for(var i = 0; i < length; i++){
             inner += '<li><a href=""></a><a href=""></a><a href=""></a><a href=""></a><span></span><span></span></li>';
-            iCss += "#picList li:nth-of-type("+ (i+1) +") a{background-position: -" + (i*50) + "px 0;}";
+            iCss += "#picList li:nth-of-type("+ (i+1) +") a{background-position: -"+(i*50)+"px 0;}";
         }
         oList.innerHTML = inner;
-        oCss += iCss;
+        oCss.innerHTML += iCss;
         oLi = oList.children;
-        for(var i = 0; i < oBtns.length; i++){
+        for(var j = 0; j < oBtns.length; j++){
             (function(a){
                 oBtns[a].onclick = function(){
                     for(var i = 0; i < oLi.length; i++){
@@ -71,7 +63,7 @@
                     oBtns[iNow].className = '';
                     iNow = a;
                 }
-            })(i)
+            })(j)
         }
     </script>
 </body>
