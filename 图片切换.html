@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @-webkit-keyframes show {
+            0%{
+                -webkit-transform: rotateX(180deg);
+                opacity: 0;
+            }
+            100%{
+                -webkit-transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes hide {
+            0%{
+                opacity: 1;
+                -webkit-transform: rotateX(0deg);
+            }
+            100%{
+                -webkit-transform: rotateX(-180deg);
+                opacity: 0;
+            }
+        }
+        #wrap{width:400px;height:300px;position:relative;margin:10px auto;-webkit-perspective: 800px;-webkit-transform-style: preserve-3d;}
+        #wrap img{width:400px;height:300px;position:absolute;left:0;top:0;-webkit-transform-origin: bottom;-webkit-transform: rotateX(0deg);opacity: 0;}
+        #wrap input{width:40px;height:40px;background:grey;border-radius: 50%;outline: none;position:absolute;top:130px;margin: 0;padding:0;}
+        #wrap input:nth-of-type(1){left:-100px;}
+        #wrap input:nth-of-type(2){right:-100px;}
+        .show{-webkit-animation: 1s show;-webkit-animation-fill-mode: forwards;}
+        .hide{-webkit-animation: 0.8s hide;-webkit-transform: rotateX(180deg);opacity: 0;}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <input type="button" value="<"/>
+        <img src="./image/1.jpg" class="show">
+        <img src="./image/2.jpg">
+        <img src="./image/3.jpg">
+        <img src="./image/4.jpg">
+        <input type="button" value=">"/>
+    </div>
+    <script>
+        var oList = document.getElementById('wrap');
+        var oBtns = oList.getElementsByTagName('input');
+        var oImg = oList.getElementsByTagName('img');
+        var oNow = 0;
+        oBtns[1].onclick = function(){
+            oImg[oNow].className = 'hide';
+            oNow++;
+            if(oNow >= oImg.length){
+                oNow = 0;
+            }
+            oImg[oNow].className = 'show';
+        };
+        oBtns[0].onclick = function(){
+            oImg[oNow].className = 'hide';
+            oNow--;
+            if(oNow <= 0){
+                oNow = oImg.length-1;
+            }
+            oImg[oNow].className = 'show';
+        }
+    </script>
+</body>
+</html>
